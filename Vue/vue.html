@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{ message }}
+    </div>
+
+    <div id="bind">
+        <span v-bind:title='messages'>
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+
+    <div id="ifCase">
+        <p v-if="condition_">
+            if condition is {{ condition_ }},it will be  print.
+        </p>
+    </div>
+
+    <div id="forCase">
+        <ol>
+            <li v-for='arg in args'>
+                {{ arg.name }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="onCase">
+        <p>{{ message }}</p>
+        <button v-on:click='reverseMessage'>click</button>
+    </div>
+
+    <div id="modelCase">
+        <p>{{ message }}</p>
+        <input v-model='message'>
+    </div>
+
+    <script>
+        var msg = new Vue({
+            el: '#box',
+            data: {
+                message: 'This is test message!'
+            }
+        });
+
+        var bind_ = new Vue({
+            el: '#bind',
+            data: {
+                messages: '页面加载于 ' + new Date().toLocaleString()
+            }
+        });
+
+        var ifCase = new Vue({
+            el: '#ifCase',
+            data: {
+                condition_: true,
+            }
+        });
+        
+        var forCase = new Vue({
+            el: "#forCase",
+            data: {
+                args: [
+                    {
+                        name: 'SunShangxiang'
+                    },
+                    {
+                        name: 'GuoJia'
+                    },
+                    {
+                        name: 'YuJi'
+                    }
+                ]
+            }
+        })
+
+        var onCase = new Vue({
+            el: '#onCase',
+            data: {
+                message: 'This conment use test reserver!'
+            },
+            methods: {
+                reverseMessage: function(){
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        })
+        
+        var modelCase = new Vue({
+            el: '#modelCase',
+            data: {
+                message: 'Hello World!'
+            }
+        })
+
+    </script>
+</body>
+</html>
