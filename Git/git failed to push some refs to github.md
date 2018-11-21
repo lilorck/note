@@ -1,4 +1,4 @@
-# Git推送到GitHub仓库
+# Git推送到GitHub仓库失败
 
 使用Git将文件推送至GitHub的远程仓库时，报错`failed to push some refs to 'git@github.com:RocsSun/mytest.git'`
 
