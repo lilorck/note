@@ -1,7 +1,16 @@
+# Git的初始化设置
+
+Git安装成功之后的Git的初始化配置
+
+## Git配置GitHub账户
+
 安装完成之后要进行git的配置，这里配置的是GitHub账户
 
-```
+```shell
+MisSa@DESKTOP-PIQ06QO MINGW64 /f
 $ git config --global user.name RocsSun
+
+MisSa@DESKTOP-PIQ06QO MINGW64 /f
 $ git config --global user.email 710989028@qq.com
 ```
 
@@ -10,7 +19,7 @@ $ git config --global user.email 710989028@qq.com
 创建仓库：
 在F(Project)盘中创建一个新仓库mygitpro
 
-```
+```shell
 MisSa@DESKTOP-PIQ06QO MINGW64 ~
 $ cd f:
 
@@ -28,4 +37,3 @@ MisSa@DESKTOP-PIQ06QO MINGW64 /f/mygitpro (master)
 $ ls -a
 ./  ../  .git/
 ```
-

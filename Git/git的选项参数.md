@@ -1,4 +1,6 @@
-```
+# Git的选项参数
+
+```shell
 MisSa@DESKTOP-PIQ06QO MINGW64 ~
 $ git
 usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
@@ -46,7 +48,6 @@ to read about a specific subcommand or concept.
 
 ```
 
-创建仓库相关 
+创建仓库相关：</br>
 clone： 克隆一个新的仓库
 init： 创建一个新的空的Git仓库，或者是重新初始化一个已存在的仓库
-
