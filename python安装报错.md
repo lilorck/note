@@ -29,13 +29,7 @@ See `config.log' for more details
 sudo yum  install gcc
 ```
 
-
-
-
-
-
 优化选项
-
 
 If you want a release build with all stable optimizations active (PGO, etc),
 please run ./configure --enable-optimizations
