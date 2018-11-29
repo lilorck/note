@@ -18,6 +18,10 @@ MongoDB中也同样有以上的概念,但是名称发生了一些变化,严格�
 
 > use.DatabaseName
 
+```shell
+use LuffyCity
+```
+
 如果该数据库不存在，则会创建并且使用，如果存在了，则切换到改数据库下。
 
 > db：代表当前所使用的数据库，
@@ -40,3 +44,42 @@ MongoDB的插入数据的三个关键字：
 > insertOne：插入一条数据,官方推荐 </br>
 > insertMany：插入多条数据,无需参数控制,官方推荐
 
+```shell
+db.Oldboy.insert({'name':'Roc', 'age':19})
+db.Oldboy.insertOne({'name':'Linga', 'age': 19})
+db.Oldboy.insertMany([{'name':'Master','age':18}, {'name':'Saya','age':20}])
+```
+
+### MongoDB的查找
+
+MongoDB的查找关键字：
+
+> find(条件):
+> findOne(条件):findOne()无条件查找一条数据,默认当前Collection中的第一条数据
+
+```shell
+db.Oldboy.find({'name': 'Master'})
+db.Oldboy.findOne({'name':'Roc'})
+db.Oldboy.findOne()
+```
+
+### MongoDB的修改
+
+MongoDB的更新关键字.({"条件"},{"关键字":{"修改内容"}})：
+
+> update: 根据条件修改该条数据的内容, 这个方法目前官方已经不推荐 </br>
+> updateOne: 根据条件修改一条数据的内容,如出现多条,只修改最靠前的数据 </br>
+> updateMany: 根据条件修改所有数据的内容,多条修改
+
+```shell
+db.girl.updateOne({'age':18}, {$set:{'name':"Million"}},)
+db.girl.updateMany({'age':18},{$set:{'gender': 'male'}})
+```
+
+### MongoDB的删除
+
+MongoDB的删除关键字：
+
+> remove({条件}): 删除满足条件的选项，
+
+***如果无条件删除数据,这里要注意了,这是删除所有数据,清空Collection***
