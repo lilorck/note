@@ -1,115 +1,201 @@
 # Flask的配置与调试
 
-总结Flask中的配置与调试：
+Flask中的配置是继承自python中的dict类，因此具有所有的dict方法。同时本身也是一个字典。其中：</br>
 
-- 配置管理
-- 调试模式
+- **`config`是Config类的实例化对象**
 
 ## 配置管理
 
-复杂的项目需要配置各种环境。如果设置项很少，可以直接硬编码进来，比如下面的方式:
+flask中的配置方式有以下几种：
+
+1. `obj.config['KEY'] = values`
+2. `obj.config.from_pyfile('target.py')`
+3. `obj.config.from_object()`
+4. `obj.config.from_envvar(env)`
+5. `obj.config.from_json`
+6. `obj.config.from_mapping`
+7. `obj.config.get_namespace`
+
+### obj.config['KEY'] = values
+
+简单粗暴，直接在application.py文件中使用。缺点是配置多的话太乱，不便于维护。
 
 ```python
+from flask import Flask, current_app
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
+
+
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf)
+    return 'Conf'
+
+
+if __name__ == '__main__':
+    app.run()
 ```
 
-`app.config`是`flask.config.Config`类的实例，继承自Python内置数据结构dict,所以可以使用update方法：
+### 从py文件中导入
+
+从编辑好的py文件中导入，在py文件中直接编辑配置，配置名大写。
+
+application.py中：
 
 ```python
-app.config.update(
-    DEBUG = True,
-    ...
-)
+from flask import Flask, current_app
+
+app = Flask(__name__)
+app.config.from_pyfile('path/to/config.py', silent=True)
+
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf) 
+    return 'Conf'
+
+
+if __name__ == '__main__':
+    app.run()
 ```
 
-`app.config`内置的全部配置变量可以参看`Builtin Configuration Values`。如果设置选项很多，想要集中管理设置项，应该将他们存放到一个文件里面。`app.config`支持多种更新配置的方式。假设现在有个叫做`settings.py`的配置文件，其中的内容如下：
+config.py中：
 
 ```python
-A = 1
+DEBUG = True
 ```
 
-可以选择如下三种方式加载:
+### 从自定义环境导入
 
-- 通过配置文件加载
+- `obj.config.from_envvar(env)`
+- **内部调用的是`from_pyfile`方法**
+
+导入编辑好的配置，生成一个环境配置。
+
+application.py中：
 
 ```python
-# 通过模块名的字符串
-app.config.from_object('settings')  
+from flask import Flask, current_app
+import os
 
-# 或者:
-import settings
-app.config.from_object(settings)
+
+os.environ['FLASK_SETTINGS'] = 'FlaskConfig.py'
+
+app = Flask(__name__)
+app.config.from_envvar('FLASK_SETTINGS')
+
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf)
+    return 'Conf'
+
+
+if __name__ == '__main__':
+    app.run()
 ```
 
-- 通过文件名字加载。但是不限于只使用.py后缀的文件名
+config.py
 
 ```python
-# slient=True该文件不存在时不抛异常，返回False,默认是会抛出异常
-app.config.from_pyfile('settings.py',slient=True)
+DEBUG = True
+NAME = 'Roc'
+AGE = 18
 ```
 
-总结如下：
+### 从对象导入
+
+- app.config.from_object()
+
+此方法是需要把配置文件的相关配置写成类属性，来实现调用。
+
+application.py中：
 
 ```python
-# ==========方式一：============
- app.config['SESSION_COOKIE_NAME'] = 'session_lvning'  #这种方式要把所有的配置都放在一个文件夹里面，看起来会比较乱，所以选择下面的方式
-# ==========方式二：==============
-app.config.from_pyfile('settings.py')  #找到配置文件路径，创建一个模块，打开文件，并获取所有的内容，再将配置文件中的所有值，都封装到上一步创建的配置文件模板中
+from flask import Flask, current_app
 
-print(app.config.get("CCC"))
-# =========方式三：对象的方式============
- import os 
- os.environ['FLAKS-SETTINGS'] = 'settings.py'
- app.config.from_envvar('FLAKS-SETTINGS') 
+app = Flask(__name__)
+app.config.from_object('FlaskConfig.Info')
 
-# ===============方式四（推荐）：字符串的方式，方便操作，不用去改配置，直接改变字符串就行了 ==============
-app.config.from_object('settings.DevConfig')
 
-# ----------settings.DevConfig----------
-from app import app
-class BaseConfig(object):
-    NNN = 123  #注意是大写
-    SESSION_COOKIE_NAME = "session_sss"
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf)
+    return 'Conf'
 
-class TestConfig(BaseConfig):
-    DB = "127.0.0.1"
 
-class DevConfig(BaseConfig):
-    DB = "52.5.7.5"
-
-class ProConfig(BaseConfig):
-    DB = "55.4.22.4"
-```
- 
-要想在视图函数中获取配置文件的值，都是通过`app.config`来拿。但是如果视图函数和Flask创建的对象app不在一个模块。就得通过导入来拿。可以不用导入。直接导入一个`current_app`，这个就是当前的app对象，用`current_app.config`就能查看到了当前app的所有的配置文件
-
-```python
-from flask import Flask,current_app
-
-@app.route('/index',methods=["GET","POST"])
-def index():
-    print(current_app.config)   #当前的app的所有配置
-    session["xx"] = "fdvbn"
-    return "index"
+if __name__ == '__main__':
+    app.run()
 ```
 
-## 调试模式
-
-虽然`app.run()`这样的方式适用于启动本地的开发服务器，但是每次修改代码后都要手动重启的话，既不方便也不够优雅。如果启用了调试模式，服务器会在代码修改后自动重新载入，并在发生错误时提供一个能获得错误上下文及可执行代码的调试页面。 
-有两种途径来启动调试模式:
-
-直接在应用对象上设置:
+config.py:
 
 ```python
-app.debug = True
-app.run()
+class BaseConf(object):
+    DEBUG = True
+
+class Info(BaseConf):
+    NAME = 'Roc'
+    AGE = 18
 ```
 
-作为run的参数传入:
+### 从Json文件中导入
+
+从Json文件格式导入，内部执行的是`json.loads()`方法
 
 ```python
-app.run(debug=True)
-``` 
+from flask import Flask, current_app
 
-需要注意，开启调试模式会成为一个巨大的安全隐患，因此他绝对不能用于生产环境中
+app = Flask(__name__)
+app.config.from_json('config.json')
+
+
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf)
+    return 'Conf'
+
+
+if __name__ == '__main__':
+    app.run()
+```
+
+config.json:
+
+```json
+{
+    "DEBUG": true,
+    "NAME": "Roc",
+    "AGE": 18
+}
+```
+
+### from_mapping
+
+该方法中传入的是字典。
+
+```python
+from flask import Flask, current_app
+
+app = Flask(__name__)
+app.config.from_mapping({"DEBUG": True, "NAME": "RocS"})
+
+
+@app.route('/')
+def root_():
+    conf = current_app.config
+    print(conf)
+    return 'Conf'
+
+
+if __name__ == '__main__':
+    app.run()
+```
+
+### get_namespace
+
+此方法待补充
