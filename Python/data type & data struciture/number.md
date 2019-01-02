@@ -17,10 +17,10 @@ Integer是Python中的int类型，是有Int类来实现的。其中：</br>
 
 ### int的范围
 
-Python 2.x:</br>
-    32位：-2^31~2^31-1 </br>
-    64位：-2^63~2^63-1 </br>
-Python 3.x:</br>
+Python 2.x:
+    32位：-2^31~2^31-1
+    64位：-2^63~2^63-1
+Python 3.x:
     无上限
 
 ## Float
