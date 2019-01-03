@@ -1,3 +1,3 @@
 # note
 
-This my note about Python, MySQL, Django, Flask, Git, Linux
+This is my note about Python, MySQL, Django, Flask, Git, Linux
