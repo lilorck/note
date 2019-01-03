@@ -6,7 +6,7 @@
 
 将改动文件添加并提交到仓库
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note/Git (master)
 $ git add 'git 报错 index file corrupt.md'
 
@@ -23,7 +23,7 @@ $ git commit -m '新增git提交到仓库报错分析'
 
 - git pull
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note/Git (master)
 $ git pull
 Already up to date.
@@ -35,7 +35,7 @@ push到远程master分支上：
 
 - git push origin master
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note/Git (master)
 $ git push origin master
 Warning: Permanently added the RSA host key for IP address '13.250.177.223' to the list of known hosts.

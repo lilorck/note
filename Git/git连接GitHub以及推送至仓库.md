@@ -9,7 +9,7 @@
 - git config --global user.name username
 - git config --global user.name email_address
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /f/mygitpro
 $ git config --global user.name RocSun
 
@@ -23,7 +23,7 @@ $ git config --global user.email 710989028@qq.com
 
 - ssh-keygen -t rsa -C '注册GitHub的邮箱'
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /f/mygitpro (master)
 $ ssh-keygen -t rsa -C '710989028@qq.com'
 Generating public/private rsa key pair.
@@ -53,7 +53,7 @@ ssh创建成功，在GitHub上添加SSH后进行测试。
 
 - ssh -T git@github.com
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 ~
 $ ssh -T git@github.com
 The authenticity of host 'github.com (13.229.188.59)' can't be established.
@@ -69,7 +69,7 @@ Hi RocsSun! You've successfully authenticated, but GitHub does not provide shell
 
 - git init
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note
 $ ls
  Bug/            Flask/        MySQL/     python安装报错.md      Vue/
@@ -88,7 +88,7 @@ Initialized empty Git repository in E:/note/.git/
 - git add file
 - git commit -m 'message'
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ git add ./*
 
@@ -143,8 +143,7 @@ $ git commit -m '初始化仓库，提交以前的所有笔记'
 
 - git remote add origin git@github.com:GitHubName/RepositoryName.git
 
-```shell
-
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ git remote add origin git@github.com:RocsSun/note.git
 ```
@@ -155,7 +154,7 @@ $ git remote add origin git@github.com:RocsSun/note.git
 
 - git push -u origin master
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ git push -u origin master
 Enumerating objects: 49, done.
@@ -174,5 +173,4 @@ To github.com:RocsSun/note.git
 Branch 'master' set up to track remote branch 'master' from 'origin'.
 
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
-
 ```

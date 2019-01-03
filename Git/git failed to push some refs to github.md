@@ -2,8 +2,7 @@
 
 使用Git将文件推送至GitHub的远程仓库时，报错`failed to push some refs to 'git@github.com:RocsSun/mytest.git'`
 
-```shell
-
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ git remote add origin git@github.com:RocsSun/mytest.gt
 
@@ -50,17 +49,20 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ git remote rm origin
-
 ```
 
 大概原因就是 意思是本地和远程的文件应该合并后才能上传本地的新文件
 
 1、先拉下来，会自动合并的（不用操心）
 
+```dos
 git pull origin master
+```
 
 2、再上传
 
+```dos
 git push -u origin master
+```
 
 成功解决问题

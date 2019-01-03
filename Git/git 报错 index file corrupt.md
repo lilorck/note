@@ -4,13 +4,11 @@
 
 ## 报错
 
-```shell
-
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note/Git (master)
 $ git add git连接GitHub以及推送至仓库.md
 error: bad signature
 fatal: index file corrupt
-
 ```
 
 ## 原因分析
@@ -23,7 +21,7 @@ fatal: index file corrupt
 2. 删除或重命名 .git/index 文件： rm -f .git/index 或 mv .git/index{,.bak}
 3. 重建 .git/index : git read-tree 或者直接 git reset
 
-```shell
+```dos
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
 $ mv .git/index .git/index.bak
 
@@ -56,5 +54,4 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 
 Roc@DESKTOP-AF552U2 MINGW64 /e/note (master)
-
 ```
