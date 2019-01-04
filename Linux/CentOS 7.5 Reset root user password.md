@@ -1,4 +1,4 @@
-# CentOS 7.5 reset root password
+# CentOS 7.5 reset root user password
 
 忘记root密码，重新设置root密码
 
