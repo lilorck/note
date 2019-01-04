@@ -1,6 +1,6 @@
 # Git的选项参数
 
-```shell
+```dos
 MisSa@DESKTOP-PIQ06QO MINGW64 ~
 $ git
 usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]

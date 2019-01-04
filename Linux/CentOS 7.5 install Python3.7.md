@@ -4,9 +4,9 @@
 
 ## 环境：
 
-- win10
-- vmware workstation 14
-- centos 7 最小化安装
+- Windows 10 Pro
+- VMWare Workstation 15 Pro
+- CentOS Linux release 7.6.1810 (Core)
 - root权限,所有操作都是在root用户下操作
 
 ## 安装依赖和yum更新

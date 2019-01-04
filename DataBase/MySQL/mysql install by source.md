@@ -4,8 +4,8 @@
 
 ## 环境
 
-Ubuntu 18.04.1 LTS <br>
-mysql-community 5.7.24 
+Ubuntu 18.04.1 LTS </br>
+mysql-community 5.7.24
 
 ## 准备
 
@@ -15,19 +15,20 @@ mysql-community 5.7.24
 
 使用以下两条命令安装：
 
-```
+```shell
 apt-cache search libaio
 apt-get install libaio1
 ```
+
 过程：
 
-```
+```shell
 root@master-ThinkPad-E455 apt-cache search libaio
 libaio-dev - Linux kernel AIO access library - development files
 libaio1 - Linux kernel AIO access library - shared library
 root@master-ThinkPad-E455 apt-get install libaio1
 Reading package lists... Done
-Building dependency tree       
+Building dependency tree
 Reading state information... Done
 The following NEW packages will be installed:
   libaio1
@@ -48,7 +49,7 @@ Processing triggers for libc-bin (2.27-3ubuntu1) ...
 
 ***yum的安装使用以下两条命令：***
 
-```
+```shell
 yum search libaio
 yum install libaio
 ```
@@ -63,13 +64,13 @@ yum install libaio
 
 由于是安装在/opt/mysql目录下，而tar解压只能在已存在的路径向下进行解压，故，先创建mysql目录
 
-```
+```shell
 mkdir /opt/mysql
 ```
 
 然后解压包：
 
-```
+```shell
 root@master-ThinkPad-E455:/opt/mysql# tar -zxvf /home/master/Downloads/mysql-5.7.24-linux-glibc2.12-x86_64.tar.gz
 ```
 
@@ -77,7 +78,7 @@ root@master-ThinkPad-E455:/opt/mysql# tar -zxvf /home/master/Downloads/mysql-5.7
 
 创建mysql用户和mysql用户组，并把mysql用户添加到mysql组下
 
-```
+```shell
 root@master-ThinkPad-E455:~# groupadd mysql  
 root@master-ThinkPad-E455:~# useradd -r -g mysql mysql
 
@@ -87,7 +88,7 @@ root@master-ThinkPad-E455:~# useradd -r -g mysql mysql
 
 在/usr/local目录下创建名为mysql的软连
 
-```
+```shell
 root@master-ThinkPad-E455:/usr/local# ln -s /opt/mysql/mysql-5.7.24-linux-glibc2.12-x86_64 mysql
 root@master-ThinkPad-E455:/usr/local# ls
 bin  etc  games  include  lib  man  mysql  sbin  share  src
@@ -95,26 +96,26 @@ bin  etc  games  include  lib  man  mysql  sbin  share  src
 
 在mysql中创建mysql-files目录，并提升权限，改变用户及用户组
 
-```
+```shell
 root@master-ThinkPad-E455:/usr/local/mysql# mkdir mysql-files
 root@master-ThinkPad-E455:/usr/local/mysql# chown mysql:mysql mysql-files
 root@master-ThinkPad-E455:/usr/local/mysql# chmod 750 mysql-files
 
 ```
 
-### 安装
+### 执行安装
 
 执行以下命令
 
-```
-shell> bin/mysqld --initialize --user=mysql 
-shell> bin/mysql_ssl_rsa_setup              
+```shell
+shell> bin/mysqld --initialize --user=mysql
+shell> bin/mysql_ssl_rsa_setup
 shell> bin/mysqld_safe --user=mysql & # Next command is optional
 ```
 
 过程：
 
-```
+```shell
 root@master-ThinkPad-E455:/usr/local/mysql# bin/mysqld --initialize --user=mysql2018-11-10T06:31:07.136423Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
 2018-11-10T06:31:08.740392Z 0 [Warning] InnoDB: New log files created, LSN=45790
 2018-11-10T06:31:09.177392Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
@@ -125,7 +126,7 @@ root@master-ThinkPad-E455:/usr/local/mysql# mysql
 
 Command 'mysql' not found, but can be installed with:
 
-apt install mysql-client-core-5.7   
+apt install mysql-client-core-5.7
 apt install mariadb-client-core-10.1
 
 root@master-ThinkPad-E455:/usr/local/mysql# bin/mysql_ssl_rsa_setup
